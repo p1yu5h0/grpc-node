@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+//in grpc, the routes are not resource oriented but action oriented.
+//in rest we have /todos /cookies
+//in grpc we have Actions, like CreateTodos, GetTodos
+
+service TodoService {
+    rpc CreateTodos (Todo) returns (Todo) {}
+    rpc GetTodos (Todo) returns (Todo) {}
+    rpc ListTodos (Empty) returns (TodoList) {}
+}
+
+message Empty {}
+
+message Todo {
+    string id = 1;
+    string title = 2;
+    optional string content = 3;
+}
+
+message TodoList {
+    repeated Todo todos = 1;
+}
+
+message TodoRequest {
+    string id = 1;
+}
+
